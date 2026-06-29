@@ -1,0 +1,46 @@
+# requirements.txt
+# Dependencies for hallucination mitigation RAG pipeline
+
+# ========================
+# Core ML/NLP
+# ========================
+sentence-transformers>=2.6.0
+faiss-cpu>=1.7.4
+transformers>=4.40.0
+torch>=2.0.0
+
+# ========================
+# Dataset Handling
+# ========================
+datasets>=2.18.0
+huggingface-hub>=0.20.0
+
+# ========================
+# Code Analysis & Validation
+# ========================
+spacy>=3.7.0
+mypy>=1.9.0
+
+# ========================
+# Evaluation Metrics
+# ========================
+rouge-score>=0.1.2
+
+# ========================
+# PDF Report Generation
+# ========================
+reportlab>=4.0.0
+matplotlib>=3.7.0
+
+# ========================
+# Utilities
+# ========================
+numpy>=1.26.0
+tqdm>=4.66.0
+rank-bm25>=0.2.2  # For hybrid search
+
+# ========================
+# Optional: SAP AI Core SDK (For Phase 3 Generation)
+# ========================
+sap-ai-sdk-gen[all]>=6.0.0  # SAP Generative AI Hub SDK (new package name)
+python-dotenv>=1.0.0         # Load .env files for credentials

@@ -1,0 +1,2922 @@
+{
+  "test_queries": [
+    {
+      "task_id": 585,
+      "query": "Write a function to find the n - expensive price items from a given dataset using heap queue algorithm.",
+      "test_cases": [
+        "assert expensive_items([{'name': 'Item-1', 'price': 101.1},{'name': 'Item-2', 'price': 555.22}],1)==[{'name': 'Item-2', 'price': 555.22}]",
+        "assert expensive_items([{'name': 'Item-1', 'price': 101.1},{'name': 'Item-2', 'price': 555.22}, {'name': 'Item-3', 'price': 45.09}],2)==[{'name': 'Item-2', 'price': 555.22},{'name': 'Item-1', 'price': 101.1}]",
+        "assert expensive_items([{'name': 'Item-1', 'price': 101.1},{'name': 'Item-2', 'price': 555.22}, {'name': 'Item-3', 'price': 45.09},{'name': 'Item-4', 'price': 22.75}],1)==[{'name': 'Item-2', 'price': 555.22}]"
+      ],
+      "reference_code": "import heapq\r\ndef expensive_items(items,n):\r\n  expensive_items = heapq.nlargest(n, items, key=lambda s: s['price'])\r\n  return expensive_items"
+    },
+    {
+      "task_id": 399,
+      "query": "Write a function to perform the mathematical bitwise xor operation across the given tuples.",
+      "test_cases": [
+        "assert bitwise_xor((10, 4, 6, 9), (5, 2, 3, 3)) == (15, 6, 5, 10)",
+        "assert bitwise_xor((11, 5, 7, 10), (6, 3, 4, 4)) == (13, 6, 3, 14)",
+        "assert bitwise_xor((12, 6, 8, 11), (7, 4, 5, 6)) == (11, 2, 13, 13)"
+      ],
+      "reference_code": "def bitwise_xor(test_tup1, test_tup2):\r\n  res = tuple(ele1 ^ ele2 for ele1, ele2 in zip(test_tup1, test_tup2))\r\n  return (res) "
+    },
+    {
+      "task_id": 853,
+      "query": "Write a python function to find sum of odd factors of a number.",
+      "test_cases": [
+        "assert sum_of_odd_Factors(30) == 24",
+        "assert sum_of_odd_Factors(18) == 13",
+        "assert sum_of_odd_Factors(2) == 1"
+      ],
+      "reference_code": "import math\r\ndef sum_of_odd_Factors(n): \r\n    res = 1\r\n    while n % 2 == 0: \r\n        n = n // 2 \r\n    for i in range(3,int(math.sqrt(n) + 1)): \r\n        count = 0\r\n        curr_sum = 1\r\n        curr_term = 1\r\n        while n % i == 0: \r\n            count+=1 \r\n            n = n // i \r\n            curr_term *= i \r\n            curr_sum += curr_term    \r\n        res *= curr_sum  \r\n    if n >= 2: \r\n        res *= (1 + n) \r\n    return res "
+    },
+    {
+      "task_id": 3,
+      "query": "Write a python function to identify non-prime numbers.",
+      "test_cases": [
+        "assert is_not_prime(2) == False",
+        "assert is_not_prime(10) == True",
+        "assert is_not_prime(35) == True"
+      ],
+      "reference_code": "import math\r\ndef is_not_prime(n):\r\n    result = False\r\n    for i in range(2,int(math.sqrt(n)) + 1):\r\n        if n % i == 0:\r\n            result = True\r\n    return result"
+    },
+    {
+      "task_id": 872,
+      "query": "Write a function to check if a nested list is a subset of another nested list.",
+      "test_cases": [
+        "assert check_subset([[1, 3], [5, 7], [9, 11], [13, 15, 17]] ,[[1, 3],[13,15,17]])==True",
+        "assert check_subset([[1, 2], [2, 3], [3, 4], [5, 6]],[[3, 4], [5, 6]])==True",
+        "assert check_subset([[[1, 2], [2, 3]], [[3, 4], [5, 7]]],[[[3, 4], [5, 6]]])==False"
+      ],
+      "reference_code": "def check_subset(list1,list2): \r\n    return all(map(list1.__contains__,list2)) "
+    },
+    {
+      "task_id": 747,
+      "query": "Write a function to find the longest common subsequence for the given three string sequence.",
+      "test_cases": [
+        "assert lcs_of_three('AGGT12', '12TXAYB', '12XBA', 6, 7, 5) == 2",
+        "assert lcs_of_three('Reels', 'Reelsfor', 'ReelsforReels', 5, 8, 13) == 5 ",
+        "assert lcs_of_three('abcd1e2', 'bc12ea', 'bd1ea', 7, 6, 5) == 3"
+      ],
+      "reference_code": "def lcs_of_three(X, Y, Z, m, n, o): \r\n\tL = [[[0 for i in range(o+1)] for j in range(n+1)] \r\n\t\tfor k in range(m+1)] \r\n\tfor i in range(m+1): \r\n\t\tfor j in range(n+1): \r\n\t\t\tfor k in range(o+1): \r\n\t\t\t\tif (i == 0 or j == 0 or k == 0): \r\n\t\t\t\t\tL[i][j][k] = 0\r\n\t\t\t\telif (X[i-1] == Y[j-1] and\r\n\t\t\t\t\tX[i-1] == Z[k-1]): \r\n\t\t\t\t\tL[i][j][k] = L[i-1][j-1][k-1] + 1\r\n\t\t\t\telse: \r\n\t\t\t\t\tL[i][j][k] = max(max(L[i-1][j][k], \r\n\t\t\t\t\tL[i][j-1][k]), \r\n\t\t\t\t\t\t\t\t\tL[i][j][k-1]) \r\n\treturn L[m][n][o]"
+    },
+    {
+      "task_id": 106,
+      "query": "Write a function to add the given list to the given tuples.",
+      "test_cases": [
+        "assert add_lists([5, 6, 7], (9, 10)) == (9, 10, 5, 6, 7)",
+        "assert add_lists([6, 7, 8], (10, 11)) == (10, 11, 6, 7, 8)",
+        "assert add_lists([7, 8, 9], (11, 12)) == (11, 12, 7, 8, 9)"
+      ],
+      "reference_code": "def add_lists(test_list, test_tup):\r\n  res = tuple(list(test_tup) + test_list)\r\n  return (res) "
+    },
+    {
+      "task_id": 295,
+      "query": "Write a function to return the sum of all divisors of a number.",
+      "test_cases": [
+        "assert sum_div(8)==7",
+        "assert sum_div(12)==16",
+        "assert sum_div(7)==1"
+      ],
+      "reference_code": "def sum_div(number):\r\n    divisors = [1]\r\n    for i in range(2, number):\r\n        if (number % i)==0:\r\n            divisors.append(i)\r\n    return sum(divisors)"
+    },
+    {
+      "task_id": 42,
+      "query": "Write a python function to find the sum of repeated elements in a given array.",
+      "test_cases": [
+        "assert find_Sum([1,2,3,1,1,4,5,6],8) == 3",
+        "assert find_Sum([1,2,3,1,1],5) == 3",
+        "assert find_Sum([1,1,2],3) == 2"
+      ],
+      "reference_code": "def find_Sum(arr,n): \r\n    return sum([x for x in arr if arr.count(x) > 1])"
+    },
+    {
+      "task_id": 148,
+      "query": "Write a function to divide a number into two parts such that the sum of digits is maximum.",
+      "test_cases": [
+        "assert sum_digits_twoparts(35)==17",
+        "assert sum_digits_twoparts(7)==7",
+        "assert sum_digits_twoparts(100)==19"
+      ],
+      "reference_code": "def sum_digits_single(x) : \r\n    ans = 0\r\n    while x : \r\n        ans += x % 10\r\n        x //= 10  \r\n    return ans \r\ndef closest(x) : \r\n    ans = 0\r\n    while (ans * 10 + 9 <= x) : \r\n        ans = ans * 10 + 9  \r\n    return ans   \r\ndef sum_digits_twoparts(N) : \r\n    A = closest(N)  \r\n    return sum_digits_single(A) + sum_digits_single(N - A) "
+    },
+    {
+      "task_id": 308,
+      "query": "Write a function to find the specified number of largest products from two given lists.",
+      "test_cases": [
+        "assert large_product([1, 2, 3, 4, 5, 6],[3, 6, 8, 9, 10, 6],3)==[60, 54, 50]",
+        "assert large_product([1, 2, 3, 4, 5, 6],[3, 6, 8, 9, 10, 6],4)==[60, 54, 50, 48]",
+        "assert large_product([1, 2, 3, 4, 5, 6],[3, 6, 8, 9, 10, 6],5)==[60, 54, 50, 48, 45]"
+      ],
+      "reference_code": "def large_product(nums1, nums2, N):\r\n    result = sorted([x*y for x in nums1 for y in nums2], reverse=True)[:N]\r\n    return result"
+    },
+    {
+      "task_id": 818,
+      "query": "Write a python function to count lower case letters in a given string.",
+      "test_cases": [
+        "assert lower_ctr('abc') == 3",
+        "assert lower_ctr('string') == 6",
+        "assert lower_ctr('Python') == 5"
+      ],
+      "reference_code": "def lower_ctr(str):\r\n      lower_ctr= 0\r\n      for i in range(len(str)):\r\n          if str[i] >= 'a' and str[i] <= 'z': lower_ctr += 1     \r\n      return  lower_ctr"
+    },
+    {
+      "task_id": 923,
+      "query": "Write a function to find the length of the shortest string that has both str1 and str2 as subsequences.",
+      "test_cases": [
+        "assert super_seq(\"AGGTAB\", \"GXTXAYB\", 6, 7) == 9",
+        "assert super_seq(\"feek\", \"eke\", 4, 3) == 5",
+        "assert super_seq(\"PARRT\", \"RTA\", 5, 3) == 6"
+      ],
+      "reference_code": "def super_seq(X, Y, m, n):\r\n\tif (not m):\r\n\t\treturn n\r\n\tif (not n):\r\n\t\treturn m\r\n\tif (X[m - 1] == Y[n - 1]):\r\n\t\treturn 1 + super_seq(X, Y, m - 1, n - 1)\r\n\treturn 1 + min(super_seq(X, Y, m - 1, n),\tsuper_seq(X, Y, m, n - 1))"
+    },
+    {
+      "task_id": 372,
+      "query": "Write a function to sort a given list of elements in ascending order using heap queue algorithm.",
+      "test_cases": [
+        "assert heap_assending([18, 14, 10, 9, 8, 7, 9, 3, 2, 4, 1])==[1, 2, 3, 4, 7, 8, 9, 9, 10, 14, 18]",
+        "assert heap_assending([25, 35, 22, 85, 14, 65, 75, 25, 58])==[14, 22, 25, 25, 35, 58, 65, 75, 85]",
+        "assert heap_assending([1, 3, 5, 7, 9, 2, 4, 6, 8, 0])==[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]"
+      ],
+      "reference_code": "import heapq as hq\r\ndef heap_assending(nums):\r\n  hq.heapify(nums)\r\n  s_result = [hq.heappop(nums) for i in range(len(nums))]\r\n  return s_result"
+    },
+    {
+      "task_id": 217,
+      "query": "Write a python function to find the first repeated character in a given string.",
+      "test_cases": [
+        "assert first_Repeated_Char(\"Google\") == \"o\"",
+        "assert first_Repeated_Char(\"data\") == \"a\"",
+        "assert first_Repeated_Char(\"python\") == '\\0'"
+      ],
+      "reference_code": "def first_Repeated_Char(str): \r\n    h = {}\r\n    for ch in str:\r\n        if ch in h: \r\n            return ch;\r\n        else: \r\n            h[ch] = 0\r\n    return '\\0'"
+    },
+    {
+      "task_id": 817,
+      "query": "Write a function to find numbers divisible by m or n from a list of numbers using lambda function.",
+      "test_cases": [
+        "assert div_of_nums([19, 65, 57, 39, 152, 639, 121, 44, 90, 190],19,13)==[19, 65, 57, 39, 152, 190]",
+        "assert div_of_nums([1, 2, 3, 5, 7, 8, 10],2,5)==[2, 5, 8, 10]",
+        "assert div_of_nums([10,15,14,13,18,12,20],10,5)==[10, 15, 20]"
+      ],
+      "reference_code": "def div_of_nums(nums,m,n):\r\n result = list(filter(lambda x: (x % m == 0 or x % n == 0), nums)) \r\n return result"
+    },
+    {
+      "task_id": 668,
+      "query": "Write a python function to replace multiple occurence of character by single.",
+      "test_cases": [
+        "assert replace('peep','e') == 'pep'",
+        "assert replace('Greek','e') == 'Grek'",
+        "assert replace('Moon','o') == 'Mon'"
+      ],
+      "reference_code": "import re \r\ndef replace(string, char): \r\n    pattern = char + '{2,}'\r\n    string = re.sub(pattern, char, string) \r\n    return string "
+    },
+    {
+      "task_id": 875,
+      "query": "Write a function to find the minimum difference in the tuple pairs of given tuples.",
+      "test_cases": [
+        "assert min_difference([(3, 5), (1, 7), (10, 3), (1, 2)]) == 1",
+        "assert min_difference([(4, 6), (12, 8), (11, 4), (2, 13)]) == 2",
+        "assert min_difference([(5, 17), (3, 9), (12, 5), (3, 24)]) == 6"
+      ],
+      "reference_code": "def min_difference(test_list):\r\n  temp = [abs(b - a) for a, b in test_list]\r\n  res = min(temp)\r\n  return (res) "
+    },
+    {
+      "task_id": 47,
+      "query": "Write a python function to find the last digit when factorial of a divides factorial of b.",
+      "test_cases": [
+        "assert compute_Last_Digit(2,4) == 2",
+        "assert compute_Last_Digit(6,8) == 6",
+        "assert compute_Last_Digit(1,2) == 2"
+      ],
+      "reference_code": "def compute_Last_Digit(A,B): \r\n    variable = 1\r\n    if (A == B): \r\n        return 1\r\n    elif ((B - A) >= 5):  \r\n        return 0\r\n    else:   \r\n        for i in range(A + 1,B + 1): \r\n            variable = (variable * (i % 10)) % 10\r\n        return variable % 10"
+    },
+    {
+      "task_id": 924,
+      "query": "Write a function to find maximum of two numbers.",
+      "test_cases": [
+        "assert max_of_two(10,20)==20",
+        "assert max_of_two(19,15)==19",
+        "assert max_of_two(-10,-20)==-10"
+      ],
+      "reference_code": "def max_of_two( x, y ):\r\n    if x > y:\r\n        return x\r\n    return y"
+    },
+    {
+      "task_id": 461,
+      "query": "Write a python function to count the upper case characters in a given string.",
+      "test_cases": [
+        "assert upper_ctr('PYthon') == 1",
+        "assert upper_ctr('BigData') == 1",
+        "assert upper_ctr('program') == 0"
+      ],
+      "reference_code": "def upper_ctr(str):\r\n    upper_ctr = 0\r\n    for i in range(len(str)):\r\n          if str[i] >= 'A' and str[i] <= 'Z': upper_ctr += 1\r\n          return upper_ctr"
+    },
+    {
+      "task_id": 593,
+      "query": "Write a function to remove leading zeroes from an ip address.",
+      "test_cases": [
+        "assert removezero_ip(\"216.08.094.196\")==('216.8.94.196') ",
+        "assert removezero_ip(\"12.01.024\")==('12.1.24') ",
+        "assert removezero_ip(\"216.08.094.0196\")==('216.8.94.196') "
+      ],
+      "reference_code": "import re\r\ndef removezero_ip(ip):\r\n string = re.sub('\\.[0]*', '.', ip)\r\n return string\r"
+    },
+    {
+      "task_id": 478,
+      "query": "Write a function to remove lowercase substrings from a given string.",
+      "test_cases": [
+        "assert remove_lowercase(\"PYTHon\")==('PYTH')",
+        "assert remove_lowercase(\"FInD\")==('FID')",
+        "assert remove_lowercase(\"STRinG\")==('STRG')"
+      ],
+      "reference_code": "import re\r\ndef remove_lowercase(str1):\r\n remove_lower = lambda text: re.sub('[a-z]', '', text)\r\n result =  remove_lower(str1)\r\n return result"
+    },
+    {
+      "task_id": 835,
+      "query": "Write a python function to find the slope of a line.",
+      "test_cases": [
+        "assert slope(4,2,2,5) == -1.5",
+        "assert slope(2,4,4,6) == 1",
+        "assert slope(1,2,4,2) == 0"
+      ],
+      "reference_code": "def slope(x1,y1,x2,y2): \r\n    return (float)(y2-y1)/(x2-x1)  "
+    },
+    {
+      "task_id": 658,
+      "query": "Write a function to find the item with maximum occurrences in a given list.",
+      "test_cases": [
+        "assert max_occurrences([2,3,8,4,7,9,8,2,6,5,1,6,1,2,3,4,6,9,1,2])==2",
+        "assert max_occurrences([1, 3,5, 7,1, 3,13, 15, 17,5, 7,9,1, 11])==1",
+        "assert max_occurrences([1, 2, 3,2, 4, 5,1, 1, 1])==1"
+      ],
+      "reference_code": "def max_occurrences(list1):\r\n    max_val = 0\r\n    result = list1[0] \r\n    for i in list1:\r\n        occu = list1.count(i)\r\n        if occu > max_val:\r\n            max_val = occu\r\n            result = i \r\n    return result"
+    },
+    {
+      "task_id": 431,
+      "query": "Write a function that takes two lists and returns true if they have at least one common element.",
+      "test_cases": [
+        "assert common_element([1,2,3,4,5], [5,6,7,8,9])==True",
+        "assert common_element([1,2,3,4,5], [6,7,8,9])==None",
+        "assert common_element(['a','b','c'], ['d','b','e'])==True"
+      ],
+      "reference_code": "def common_element(list1, list2):\r\n     result = False\r\n     for x in list1:\r\n         for y in list2:\r\n             if x == y:\r\n                 result = True\r\n                 return result"
+    },
+    {
+      "task_id": 423,
+      "query": "Write a function to solve gold mine problem.",
+      "test_cases": [
+        "assert get_maxgold([[1, 3, 1, 5],[2, 2, 4, 1],[5, 0, 2, 3],[0, 6, 1, 2]],4,4)==16",
+        "assert get_maxgold([[10,20],[30,40]],2,2)==70",
+        "assert get_maxgold([[4,9],[3,7]],2,2)==13"
+      ],
+      "reference_code": "def get_maxgold(gold, m, n): \r\n    goldTable = [[0 for i in range(n)] \r\n                        for j in range(m)]   \r\n    for col in range(n-1, -1, -1): \r\n        for row in range(m):  \r\n            if (col == n-1): \r\n                right = 0\r\n            else: \r\n                right = goldTable[row][col+1] \r\n            if (row == 0 or col == n-1): \r\n                right_up = 0\r\n            else: \r\n                right_up = goldTable[row-1][col+1] \r\n            if (row == m-1 or col == n-1): \r\n                right_down = 0\r\n            else: \r\n                right_down = goldTable[row+1][col+1] \r\n            goldTable[row][col] = gold[row][col] + max(right, right_up, right_down) \r\n    res = goldTable[0][0] \r\n    for i in range(1, m): \r\n        res = max(res, goldTable[i][0])  \r\n    return res "
+    },
+    {
+      "task_id": 933,
+      "query": "Write a function to convert camel case string to snake case string by using regex.",
+      "test_cases": [
+        "assert camel_to_snake('GoogleAssistant') == 'google_assistant'",
+        "assert camel_to_snake('ChromeCast') == 'chrome_cast'",
+        "assert camel_to_snake('QuadCore') == 'quad_core'"
+      ],
+      "reference_code": "import re\r\ndef camel_to_snake(text):\r\n  str1 = re.sub('(.)([A-Z][a-z]+)', r'\\1_\\2', text)\r\n  return re.sub('([a-z0-9])([A-Z])', r'\\1_\\2', str1).lower()"
+    },
+    {
+      "task_id": 338,
+      "query": "Write a python function to count the number of substrings with same first and last characters.",
+      "test_cases": [
+        "assert count_Substring_With_Equal_Ends('aba') == 4",
+        "assert count_Substring_With_Equal_Ends('abcab') == 7",
+        "assert count_Substring_With_Equal_Ends('abc') == 3"
+      ],
+      "reference_code": "def check_Equality(s): \r\n    return (ord(s[0]) == ord(s[len(s) - 1])); \r\ndef count_Substring_With_Equal_Ends(s): \r\n    result = 0; \r\n    n = len(s); \r\n    for i in range(n):\r\n        for j in range(1,n-i+1): \r\n            if (check_Equality(s[i:i+j])): \r\n                result+=1; \r\n    return result; "
+    },
+    {
+      "task_id": 825,
+      "query": "Write a python function to access multiple elements of specified index from a given list.",
+      "test_cases": [
+        "assert access_elements([2,3,8,4,7,9],[0,3,5]) == [2, 4, 9]",
+        "assert access_elements([1, 2, 3, 4, 5],[1,2]) == [2,3]",
+        "assert access_elements([1,0,2,3],[0,1]) == [1,0]"
+      ],
+      "reference_code": "def access_elements(nums, list_index):\r\n    result = [nums[i] for i in list_index]\r\n    return result"
+    },
+    {
+      "task_id": 207,
+      "query": "Write a function to count the longest repeating subsequences such that the two subsequences don\u2019t have same string characters at same positions.",
+      "test_cases": [
+        "assert find_longest_repeating_subseq(\"AABEBCDD\") == 3",
+        "assert find_longest_repeating_subseq(\"aabb\") == 2",
+        "assert find_longest_repeating_subseq(\"aab\") == 1"
+      ],
+      "reference_code": "def find_longest_repeating_subseq(str): \r\n\tn = len(str) \r\n\tdp = [[0 for k in range(n+1)] for l in range(n+1)] \r\n\tfor i in range(1, n+1): \r\n\t\tfor j in range(1, n+1): \r\n\t\t\tif (str[i-1] == str[j-1] and i != j): \r\n\t\t\t\tdp[i][j] = 1 + dp[i-1][j-1] \r\n\t\t\telse: \r\n\t\t\t\tdp[i][j] = max(dp[i][j-1], dp[i-1][j]) \r\n\treturn dp[n][n]"
+    },
+    {
+      "task_id": 341,
+      "query": "Write a function to convert the given set into ordered tuples.",
+      "test_cases": [
+        "assert set_to_tuple({1, 2, 3, 4, 5}) == (1, 2, 3, 4, 5)",
+        "assert set_to_tuple({6, 7, 8, 9, 10, 11}) == (6, 7, 8, 9, 10, 11)",
+        "assert set_to_tuple({12, 13, 14, 15, 16}) == (12, 13, 14, 15, 16)"
+      ],
+      "reference_code": "def set_to_tuple(s):\r\n  t = tuple(sorted(s))\r\n  return (t)"
+    },
+    {
+      "task_id": 292,
+      "query": "Write a python function to find quotient of two numbers.",
+      "test_cases": [
+        "assert find(10,3) == 3",
+        "assert find(4,2) == 2",
+        "assert find(20,5) == 4"
+      ],
+      "reference_code": "def find(n,m):  \r\n    q = n//m \r\n    return (q)"
+    },
+    {
+      "task_id": 877,
+      "query": "Write a python function to sort the given string.",
+      "test_cases": [
+        "assert sort_String(\"cba\") == \"abc\"",
+        "assert sort_String(\"data\") == \"aadt\"",
+        "assert sort_String(\"zxy\") == \"xyz\""
+      ],
+      "reference_code": "def sort_String(str) : \r\n    str = ''.join(sorted(str)) \r\n    return (str) "
+    },
+    {
+      "task_id": 25,
+      "query": "Write a python function to find the product of non-repeated elements in a given array.",
+      "test_cases": [
+        "assert find_Product([1,1,2,3],4) == 6",
+        "assert find_Product([1,2,3,1,1],5) == 6",
+        "assert find_Product([1,1,4,5,6],5) == 120"
+      ],
+      "reference_code": "def find_Product(arr,n): \r\n    arr.sort() \r\n    prod = 1\r\n    for i in range(0,n,1): \r\n        if (arr[i - 1] != arr[i]): \r\n            prod = prod * arr[i] \r\n    return prod; "
+    },
+    {
+      "task_id": 110,
+      "query": "Write a function to extract the ranges that are missing from the given list with the given start range and end range values.",
+      "test_cases": [
+        "assert extract_missing([(6, 9), (15, 34), (48, 70)], 2, 100) == [(2, 6), (9, 100), (9, 15), (34, 100), (34, 48), (70, 100)]",
+        "assert extract_missing([(7, 2), (15, 19), (38, 50)], 5, 60) == [(5, 7), (2, 60), (2, 15), (19, 60), (19, 38), (50, 60)]",
+        "assert extract_missing([(7, 2), (15, 19), (38, 50)], 1, 52) == [(1, 7), (2, 52), (2, 15), (19, 52), (19, 38), (50, 52)]"
+      ],
+      "reference_code": "def extract_missing(test_list, strt_val, stop_val):\r\n  res = []\r\n  for sub in test_list:\r\n    if sub[0] > strt_val:\r\n      res.append((strt_val, sub[0]))\r\n      strt_val = sub[1]\r\n    if strt_val < stop_val:\r\n      res.append((strt_val, stop_val))\r\n  return (res) "
+    },
+    {
+      "task_id": 768,
+      "query": "Write a python function to check for odd parity of a given number.",
+      "test_cases": [
+        "assert check_Odd_Parity(13) == True",
+        "assert check_Odd_Parity(21) == True",
+        "assert check_Odd_Parity(18) == False"
+      ],
+      "reference_code": "def check_Odd_Parity(x): \r\n    parity = 0\r\n    while (x != 0): \r\n        x = x & (x - 1) \r\n        parity += 1\r\n    if (parity % 2 == 1): \r\n        return True\r\n    else: \r\n        return False"
+    },
+    {
+      "task_id": 5,
+      "query": "Write a function to find the number of ways to fill it with 2 x 1 dominoes for the given 3 x n board.",
+      "test_cases": [
+        "assert count_ways(2) == 3",
+        "assert count_ways(8) == 153",
+        "assert count_ways(12) == 2131"
+      ],
+      "reference_code": "def count_ways(n): \r\n\tA = [0] * (n + 1) \r\n\tB = [0] * (n + 1) \r\n\tA[0] = 1\r\n\tA[1] = 0\r\n\tB[0] = 0\r\n\tB[1] = 1\r\n\tfor i in range(2, n+1): \r\n\t\tA[i] = A[i - 2] + 2 * B[i - 1] \r\n\t\tB[i] = A[i - 1] + B[i - 2] \r\n\treturn A[n] "
+    },
+    {
+      "task_id": 383,
+      "query": "Write a python function to toggle all odd bits of a given number.",
+      "test_cases": [
+        "assert even_bit_toggle_number(10) == 15",
+        "assert even_bit_toggle_number(20) == 1",
+        "assert even_bit_toggle_number(30) == 11"
+      ],
+      "reference_code": "def even_bit_toggle_number(n) : \r\n    res = 0; count = 0; temp = n    \r\n    while(temp > 0 ) : \r\n        if (count % 2 == 0) : \r\n            res = res | (1 << count)      \r\n        count = count + 1\r\n        temp >>= 1 \r\n    return n ^ res "
+    },
+    {
+      "task_id": 183,
+      "query": "Write a function to count all the distinct pairs having a difference of k in any array.",
+      "test_cases": [
+        "assert count_pairs([1, 5, 3, 4, 2], 5, 3) == 2",
+        "assert count_pairs([8, 12, 16, 4, 0, 20], 6, 4) == 5",
+        "assert count_pairs([2, 4, 1, 3, 4], 5, 2) == 3"
+      ],
+      "reference_code": "def count_pairs(arr, n, k):\r\n  count=0;\r\n  for i in range(0,n):\r\n    for j in range(i+1, n):\r\n      if arr[i] - arr[j] == k or arr[j] - arr[i] == k:\r\n        count += 1\r\n  return count"
+    },
+    {
+      "task_id": 776,
+      "query": "Write a function to count those characters which have vowels as their neighbors in the given string.",
+      "test_cases": [
+        "assert count_vowels('bestinstareels') == 7",
+        "assert count_vowels('partofthejourneyistheend') == 12",
+        "assert count_vowels('amazonprime') == 5"
+      ],
+      "reference_code": "def count_vowels(test_str):\r\n  res = 0\r\n  vow_list = ['a', 'e', 'i', 'o', 'u']\r\n  for idx in range(1, len(test_str) - 1):\r\n    if test_str[idx] not in vow_list and (test_str[idx - 1] in vow_list or test_str[idx + 1] in vow_list):\r\n      res += 1\r\n  if test_str[0] not in vow_list and test_str[1] in vow_list:\r\n    res += 1\r\n  if test_str[-1] not in vow_list and test_str[-2] in vow_list:\r\n    res += 1\r\n  return (res) "
+    },
+    {
+      "task_id": 538,
+      "query": "Write a python function to convert a given string list to a tuple.",
+      "test_cases": [
+        "assert string_list_to_tuple((\"python 3.0\")) == ('p', 'y', 't', 'h', 'o', 'n', '3', '.', '0')",
+        "assert string_list_to_tuple((\"bigdata\")) == ('b', 'i', 'g', 'd', 'a', 't', 'a')",
+        "assert string_list_to_tuple((\"language\")) == ('l', 'a', 'n', 'g', 'u', 'a', 'g','e')"
+      ],
+      "reference_code": "def string_list_to_tuple(str1):\r\n    result = tuple(x for x in str1 if not x.isspace()) \r\n    return result"
+    },
+    {
+      "task_id": 260,
+      "query": "Write a function to find the nth newman\u2013shanks\u2013williams prime number.",
+      "test_cases": [
+        "assert newman_prime(3) == 7 ",
+        "assert newman_prime(4) == 17",
+        "assert newman_prime(5) == 41"
+      ],
+      "reference_code": "def newman_prime(n): \r\n\tif n == 0 or n == 1: \r\n\t\treturn 1\r\n\treturn 2 * newman_prime(n - 1) + newman_prime(n - 2)"
+    },
+    {
+      "task_id": 674,
+      "query": "Write a function to remove duplicate words from a given string using collections module.",
+      "test_cases": [
+        "assert remove_duplicate(\"Python Exercises Practice Solution Exercises\")==(\"Python Exercises Practice Solution\")",
+        "assert remove_duplicate(\"Python Exercises Practice Solution Python\")==(\"Python Exercises Practice Solution\")",
+        "assert remove_duplicate(\"Python Exercises Practice Solution Practice\")==(\"Python Exercises Practice Solution\")"
+      ],
+      "reference_code": "from collections import OrderedDict\r\ndef remove_duplicate(string):\r\n  result = ' '.join(OrderedDict((w,w) for w in string.split()).keys())\r\n  return result"
+    },
+    {
+      "task_id": 300,
+      "query": "Write a function to find the count of all binary sequences of length 2n such that sum of first n bits is same as sum of last n bits.",
+      "test_cases": [
+        "assert count_binary_seq(1) == 2.0",
+        "assert count_binary_seq(2) == 6.0",
+        "assert count_binary_seq(3) == 20.0"
+      ],
+      "reference_code": "def count_binary_seq(n): \r\n\tnCr = 1\r\n\tres = 1\r\n\tfor r in range(1, n + 1): \r\n\t\tnCr = (nCr * (n + 1 - r)) / r \r\n\t\tres += nCr * nCr \r\n\treturn res "
+    },
+    {
+      "task_id": 336,
+      "query": "Write a function to check whether the given month name contains 28 days or not.",
+      "test_cases": [
+        "assert check_monthnum(\"February\")==True",
+        "assert check_monthnum(\"January\")==False",
+        "assert check_monthnum(\"March\")==False"
+      ],
+      "reference_code": "def check_monthnum(monthname1):\r\n  if monthname1 == \"February\":\r\n    return True\r\n  else:\r\n    return False"
+    },
+    {
+      "task_id": 581,
+      "query": "Write a python function to find the surface area of the square pyramid.",
+      "test_cases": [
+        "assert surface_Area(3,4) == 33",
+        "assert surface_Area(4,5) == 56",
+        "assert surface_Area(1,2) == 5"
+      ],
+      "reference_code": "def surface_Area(b,s): \r\n    return 2 * b * s + pow(b,2) "
+    },
+    {
+      "task_id": 874,
+      "query": "Write a python function to check if the string is a concatenation of another string.",
+      "test_cases": [
+        "assert check_Concat(\"abcabcabc\",\"abc\") == True",
+        "assert check_Concat(\"abcab\",\"abc\") == False",
+        "assert check_Concat(\"aba\",\"ab\") == False"
+      ],
+      "reference_code": "def check_Concat(str1,str2):\r\n    N = len(str1)\r\n    M = len(str2)\r\n    if (N % M != 0):\r\n        return False\r\n    for i in range(N):\r\n        if (str1[i] != str2[i % M]):\r\n            return False         \r\n    return True"
+    },
+    {
+      "task_id": 323,
+      "query": "Write a function to re-arrange the given array in alternating positive and negative items.",
+      "test_cases": [
+        "assert re_arrange([-5, -2, 5, 2, 4,\t7, 1, 8, 0, -8], 10) == [-5, 5, -2, 2, -8, 4, 7, 1, 8, 0]",
+        "assert re_arrange([1, 2, 3, -4, -1, 4], 6) == [-4, 1, -1, 2, 3, 4]",
+        "assert re_arrange([4, 7, 9, 77, -4, 5, -3, -9], 8) == [-4, 4, -3, 7, -9, 9, 77, 5]"
+      ],
+      "reference_code": "def right_rotate(arr, n, out_of_place, cur):\r\n\ttemp = arr[cur]\r\n\tfor i in range(cur, out_of_place, -1):\r\n\t\tarr[i] = arr[i - 1]\r\n\tarr[out_of_place] = temp\r\n\treturn arr\r\ndef re_arrange(arr, n):\r\n\tout_of_place = -1\r\n\tfor index in range(n):\r\n\t\tif (out_of_place >= 0):\r\n\t\t\tif ((arr[index] >= 0 and arr[out_of_place] < 0) or\r\n\t\t\t(arr[index] < 0 and arr[out_of_place] >= 0)):\r\n\t\t\t\tarr = right_rotate(arr, n, out_of_place, index)\r\n\t\t\t\tif (index-out_of_place > 2):\r\n\t\t\t\t\tout_of_place += 2\r\n\t\t\t\telse:\r\n\t\t\t\t\tout_of_place = - 1\r\n\t\tif (out_of_place == -1):\r\n\t\t\tif ((arr[index] >= 0 and index % 2 == 0) or\r\n\t\t\t (arr[index] < 0 and index % 2 == 1)):\r\n\t\t\t\tout_of_place = index\r\n\treturn arr"
+    },
+    {
+      "task_id": 815,
+      "query": "Write a function to sort the given array without using any sorting algorithm. the given array consists of only 0, 1, and 2.",
+      "test_cases": [
+        "assert sort_by_dnf([1,2,0,1,0,1,2,1,1], 9) == [0, 0, 1, 1, 1, 1, 1, 2, 2]",
+        "assert sort_by_dnf([1,0,0,1,2,1,2,2,1,0], 10) == [0, 0, 0, 1, 1, 1, 1, 2, 2, 2]",
+        "assert sort_by_dnf([2,2,1,0,0,0,1,1,2,1], 10) == [0, 0, 0, 1, 1, 1, 1, 2, 2, 2]"
+      ],
+      "reference_code": "def sort_by_dnf(arr, n):\r\n  low=0\r\n  mid=0\r\n  high=n-1\r\n  while mid <= high:\r\n    if arr[mid] == 0:\r\n      arr[low], arr[mid] = arr[mid], arr[low]\r\n      low = low + 1\r\n      mid = mid + 1\r\n    elif arr[mid] == 1:\r\n      mid = mid + 1\r\n    else:\r\n      arr[mid], arr[high] = arr[high], arr[mid]\r\n      high = high - 1\r\n  return arr"
+    },
+    {
+      "task_id": 964,
+      "query": "Write a python function to check whether the length of the word is even or not.",
+      "test_cases": [
+        "assert word_len(\"program\") == False",
+        "assert word_len(\"solution\") == True",
+        "assert word_len(\"data\") == True"
+      ],
+      "reference_code": "def word_len(s): \r\n    s = s.split(' ')   \r\n    for word in s:    \r\n        if len(word)%2==0: \r\n            return True  \r\n        else:\r\n          return False"
+    },
+    {
+      "task_id": 16,
+      "query": "Write a function to find sequences of lowercase letters joined with an underscore.",
+      "test_cases": [
+        "assert text_lowercase_underscore(\"aab_cbbbc\")==('Found a match!')",
+        "assert text_lowercase_underscore(\"aab_Abbbc\")==('Not matched!')",
+        "assert text_lowercase_underscore(\"Aaab_abbbc\")==('Not matched!')"
+      ],
+      "reference_code": "import re\r\ndef text_lowercase_underscore(text):\r\n        patterns = '^[a-z]+_[a-z]+$'\r\n        if re.search(patterns,  text):\r\n                return 'Found a match!'\r\n        else:\r\n                return('Not matched!')"
+    },
+    {
+      "task_id": 767,
+      "query": "Write a python function to count the number of pairs whose sum is equal to \u2018sum\u2019.",
+      "test_cases": [
+        "assert get_Pairs_Count([1,1,1,1],4,2) == 6",
+        "assert get_Pairs_Count([1,5,7,-1,5],5,6) == 3",
+        "assert get_Pairs_Count([1,-2,3],3,1) == 1"
+      ],
+      "reference_code": "def get_Pairs_Count(arr,n,sum):\r\n    count = 0  \r\n    for i in range(0,n):\r\n        for j in range(i + 1,n):\r\n            if arr[i] + arr[j] == sum:\r\n                count += 1\r\n    return count"
+    },
+    {
+      "task_id": 974,
+      "query": "Write a function to find the minimum total path sum in the given triangle.",
+      "test_cases": [
+        "assert min_sum_path([[ 2 ], [3, 9 ], [1, 6, 7 ]]) == 6",
+        "assert min_sum_path([[ 2 ], [3, 7 ], [8, 5, 6 ]]) == 10 ",
+        "assert min_sum_path([[ 3 ], [6, 4 ], [5, 2, 7 ]]) == 9"
+      ],
+      "reference_code": "def min_sum_path(A): \r\n\tmemo = [None] * len(A) \r\n\tn = len(A) - 1\r\n\tfor i in range(len(A[n])): \r\n\t\tmemo[i] = A[n][i] \r\n\tfor i in range(len(A) - 2, -1,-1): \r\n\t\tfor j in range( len(A[i])): \r\n\t\t\tmemo[j] = A[i][j] + min(memo[j], \r\n\t\t\t\t\t\t\t\t\tmemo[j + 1]) \r\n\treturn memo[0]"
+    },
+    {
+      "task_id": 491,
+      "query": "Write a function to find the sum of geometric progression series.",
+      "test_cases": [
+        "assert sum_gp(1,5,2)==31",
+        "assert sum_gp(1,5,4)==341",
+        "assert sum_gp(2,6,3)==728"
+      ],
+      "reference_code": "import math\r\ndef sum_gp(a,n,r):\r\n total = (a * (1 - math.pow(r, n ))) / (1- r)\r\n return total"
+    },
+    {
+      "task_id": 287,
+      "query": "Write a python function to find the sum of squares of first n even natural numbers.",
+      "test_cases": [
+        "assert square_Sum(2) == 20",
+        "assert square_Sum(3) == 56",
+        "assert square_Sum(4) == 120"
+      ],
+      "reference_code": "def square_Sum(n):  \r\n    return int(2*n*(n+1)*(2*n+1)/3)"
+    },
+    {
+      "task_id": 101,
+      "query": "Write a function to find the kth element in the given array.",
+      "test_cases": [
+        "assert kth_element([12,3,5,7,19], 5, 2) == 3",
+        "assert kth_element([17,24,8,23], 4, 3) == 8",
+        "assert kth_element([16,21,25,36,4], 5, 4) == 36"
+      ],
+      "reference_code": "def kth_element(arr, n, k):\r\n  for i in range(n):\r\n    for j in range(0, n-i-1):\r\n      if arr[j] > arr[j+1]:\r\n        arr[j], arr[j+1] == arr[j+1], arr[j]\r\n  return arr[k-1]"
+    },
+    {
+      "task_id": 565,
+      "query": "Write a python function to split a string into characters.",
+      "test_cases": [
+        "assert split('python') == ['p','y','t','h','o','n']",
+        "assert split('Name') == ['N','a','m','e']",
+        "assert split('program') == ['p','r','o','g','r','a','m']"
+      ],
+      "reference_code": "def split(word): \r\n    return [char for char in word] "
+    },
+    {
+      "task_id": 558,
+      "query": "Write a python function to find the digit distance between two integers.",
+      "test_cases": [
+        "assert digit_distance_nums(1,2) == 1",
+        "assert digit_distance_nums(23,56) == 6",
+        "assert digit_distance_nums(123,256) == 7"
+      ],
+      "reference_code": "def digit_distance_nums(n1, n2):\r\n         return sum(map(int,str(abs(n1-n2))))"
+    },
+    {
+      "task_id": 704,
+      "query": "Write a function to calculate the harmonic sum of n-1.",
+      "test_cases": [
+        "assert harmonic_sum(10)==2.9289682539682538",
+        "assert harmonic_sum(4)==2.083333333333333",
+        "assert harmonic_sum(7)==2.5928571428571425 "
+      ],
+      "reference_code": "def harmonic_sum(n):\r\n  if n < 2:\r\n    return 1\r\n  else:\r\n    return 1 / n + (harmonic_sum(n - 1))"
+    },
+    {
+      "task_id": 524,
+      "query": "Write a function to find the sum of maximum increasing subsequence of the given array.",
+      "test_cases": [
+        "assert max_sum_increasing_subsequence([1, 101, 2, 3, 100, 4, 5], 7) == 106",
+        "assert max_sum_increasing_subsequence([3, 4, 5, 10], 4) == 22",
+        "assert max_sum_increasing_subsequence([10, 5, 4, 3], 4) == 10"
+      ],
+      "reference_code": "def max_sum_increasing_subsequence(arr, n): \r\n\tmax = 0\r\n\tmsis = [0 for x in range(n)] \r\n\tfor i in range(n): \r\n\t\tmsis[i] = arr[i] \r\n\tfor i in range(1, n): \r\n\t\tfor j in range(i): \r\n\t\t\tif (arr[i] > arr[j] and\r\n\t\t\t\tmsis[i] < msis[j] + arr[i]): \r\n\t\t\t\tmsis[i] = msis[j] + arr[i] \r\n\tfor i in range(n): \r\n\t\tif max < msis[i]: \r\n\t\t\tmax = msis[i] \r\n\treturn max"
+    },
+    {
+      "task_id": 589,
+      "query": "Write a function to find perfect squares between two given numbers.",
+      "test_cases": [
+        "assert perfect_squares(1,30)==[1, 4, 9, 16, 25]",
+        "assert perfect_squares(50,100)==[64, 81, 100]",
+        "assert perfect_squares(100,200)==[100, 121, 144, 169, 196]"
+      ],
+      "reference_code": "def perfect_squares(a, b):\r\n    lists=[]\r\n    for i in range (a,b+1):\r\n        j = 1;\r\n        while j*j <= i:\r\n            if j*j == i:\r\n                 lists.append(i)  \r\n            j = j+1\r\n        i = i+1\r\n    return lists"
+    },
+    {
+      "task_id": 512,
+      "query": "Write a function to count the element frequency in the mixed nested tuple.",
+      "test_cases": [
+        "assert count_element_freq((5, 6, (5, 6), 7, (8, 9), 9) ) == {5: 2, 6: 2, 7: 1, 8: 1, 9: 2}",
+        "assert count_element_freq((6, 7, (6, 7), 8, (9, 10), 10) ) == {6: 2, 7: 2, 8: 1, 9: 1, 10: 2}",
+        "assert count_element_freq((7, 8, (7, 8), 9, (10, 11), 11) ) == {7: 2, 8: 2, 9: 1, 10: 1, 11: 2}"
+      ],
+      "reference_code": "def flatten(test_tuple): \r\n\tfor tup in test_tuple: \r\n\t\tif isinstance(tup, tuple): \r\n\t\t\tyield from flatten(tup) \r\n\t\telse: \r\n\t\t\tyield tup \r\ndef count_element_freq(test_tuple):\r\n  res = {}\r\n  for ele in flatten(test_tuple):\r\n    if ele not in res:\r\n      res[ele] = 0\r\n    res[ele] += 1\r\n  return (res) "
+    },
+    {
+      "task_id": 682,
+      "query": "Write a function to multiply two lists using map and lambda function.",
+      "test_cases": [
+        "assert mul_list([1, 2, 3],[4,5,6])==[4,10,18]",
+        "assert mul_list([1,2],[3,4])==[3,8]",
+        "assert mul_list([90,120],[50,70])==[4500,8400]"
+      ],
+      "reference_code": "def mul_list(nums1,nums2):\r\n  result = map(lambda x, y: x * y, nums1, nums2)\r\n  return list(result)"
+    },
+    {
+      "task_id": 897,
+      "query": "Write a python function to check whether the word is present in a given sentence or not.",
+      "test_cases": [
+        "assert is_Word_Present(\"machine learning\",\"machine\") == True",
+        "assert is_Word_Present(\"easy\",\"fun\") == False",
+        "assert is_Word_Present(\"python language\",\"code\") == False"
+      ],
+      "reference_code": "def is_Word_Present(sentence,word): \r\n    s = sentence.split(\" \") \r\n    for i in s:  \r\n        if (i == word): \r\n            return True\r\n    return False"
+    },
+    {
+      "task_id": 428,
+      "query": "Write a function to sort the given array by using shell sort.",
+      "test_cases": [
+        "assert shell_sort([12, 23, 4, 5, 3, 2, 12, 81, 56, 95]) == [2, 3, 4, 5, 12, 12, 23, 56, 81, 95]",
+        "assert shell_sort([24, 22, 39, 34, 87, 73, 68]) == [22, 24, 34, 39, 68, 73, 87]",
+        "assert shell_sort([32, 30, 16, 96, 82, 83, 74]) == [16, 30, 32, 74, 82, 83, 96]"
+      ],
+      "reference_code": "def shell_sort(my_list):\r\n    gap = len(my_list) // 2\r\n    while gap > 0:\r\n        for i in range(gap, len(my_list)):\r\n            current_item = my_list[i]\r\n            j = i\r\n            while j >= gap and my_list[j - gap] > current_item:\r\n                my_list[j] = my_list[j - gap]\r\n                j -= gap\r\n            my_list[j] = current_item\r\n        gap //= 2\r\n\r\n    return my_list"
+    },
+    {
+      "task_id": 834,
+      "query": "Write a function to generate a square matrix filled with elements from 1 to n raised to the power of 2 in spiral order.",
+      "test_cases": [
+        "assert generate_matrix(3)==[[1, 2, 3], [8, 9, 4], [7, 6, 5]] ",
+        "assert generate_matrix(2)==[[1,2],[4,3]]",
+        "assert generate_matrix(7)==[[1, 2, 3, 4, 5, 6, 7], [24, 25, 26, 27, 28, 29, 8], [23, 40, 41, 42, 43, 30, 9], [22, 39, 48, 49, 44, 31, 10], [21, 38, 47, 46, 45, 32, 11], [20, 37, 36, 35, 34, 33, 12], [19, 18, 17, 16, 15, 14, 13]]"
+      ],
+      "reference_code": "def generate_matrix(n):\r\n        if n<=0:\r\n            return [] \r\n        matrix=[row[:] for row in [[0]*n]*n]        \r\n        row_st=0\r\n        row_ed=n-1        \r\n        col_st=0\r\n        col_ed=n-1\r\n        current=1        \r\n        while (True):\r\n            if current>n*n:\r\n                break\r\n            for c in range (col_st, col_ed+1):\r\n                matrix[row_st][c]=current\r\n                current+=1\r\n            row_st+=1\r\n            for r in range (row_st, row_ed+1):\r\n                matrix[r][col_ed]=current\r\n                current+=1\r\n            col_ed-=1\r\n            for c in range (col_ed, col_st-1, -1):\r\n                matrix[row_ed][c]=current\r\n                current+=1\r\n            row_ed-=1\r\n            for r in range (row_ed, row_st-1, -1):\r\n                matrix[r][col_st]=current\r\n                current+=1\r\n            col_st+=1\r\n        return matrix"
+    },
+    {
+      "task_id": 314,
+      "query": "Write a function to find out the maximum sum such that no two chosen numbers are adjacent for the given rectangular grid of dimension 2 x n.",
+      "test_cases": [
+        "assert max_sum_rectangular_grid([ [1, 4, 5], [2, 0, 0 ] ], 3) == 7",
+        "assert max_sum_rectangular_grid([ [ 1, 2, 3, 4, 5], [ 6, 7, 8, 9, 10] ], 5) == 24",
+        "assert max_sum_rectangular_grid([ [7, 9, 11, 15, 19], [21, 25, 28, 31, 32] ], 5) == 81"
+      ],
+      "reference_code": "def max_sum_rectangular_grid(grid, n) : \r\n\tincl = max(grid[0][0], grid[1][0]) \r\n\texcl = 0\r\n\tfor i in range(1, n) : \r\n\t\texcl_new = max(excl, incl) \r\n\t\tincl = excl + max(grid[0][i], grid[1][i]) \r\n\t\texcl = excl_new \r\n\treturn max(excl, incl)"
+    },
+    {
+      "task_id": 647,
+      "query": "Write a function to split a string at uppercase letters.",
+      "test_cases": [
+        "assert split_upperstring(\"PythonProgramLanguage\")==['Python','Program','Language']",
+        "assert split_upperstring(\"PythonProgram\")==['Python','Program']",
+        "assert split_upperstring(\"ProgrammingLanguage\")==['Programming','Language']"
+      ],
+      "reference_code": "import re\r\ndef split_upperstring(text):\r\n return (re.findall('[A-Z][^A-Z]*', text))"
+    },
+    {
+      "task_id": 672,
+      "query": "Write a function to find maximum of three numbers.",
+      "test_cases": [
+        "assert max_of_three(10,20,30)==30",
+        "assert max_of_three(55,47,39)==55",
+        "assert max_of_three(10,49,30)==49"
+      ],
+      "reference_code": "def max_of_three(num1,num2,num3): \r\n    if (num1 >= num2) and (num1 >= num3):\r\n       lnum = num1\r\n    elif (num2 >= num1) and (num2 >= num3):\r\n       lnum = num2\r\n    else:\r\n       lnum = num3\r\n    return lnum"
+    },
+    {
+      "task_id": 358,
+      "query": "Write a function to find modulo division of two lists using map and lambda function.",
+      "test_cases": [
+        "assert moddiv_list([4,5,6],[1, 2, 3])==[0, 1, 0]",
+        "assert moddiv_list([3,2],[1,4])==[0, 2]",
+        "assert moddiv_list([90,120],[50,70])==[40, 50]"
+      ],
+      "reference_code": "def moddiv_list(nums1,nums2):\r\n  result = map(lambda x, y: x % y, nums1, nums2)\r\n  return list(result)"
+    },
+    {
+      "task_id": 797,
+      "query": "Write a python function to find the sum of all odd natural numbers within the range l and r.",
+      "test_cases": [
+        "assert sum_in_Range(2,5) == 8",
+        "assert sum_in_Range(5,7) == 12",
+        "assert sum_in_Range(7,13) == 40"
+      ],
+      "reference_code": "def sum_Odd(n): \r\n    terms = (n + 1)//2\r\n    sum1 = terms * terms \r\n    return sum1  \r\ndef sum_in_Range(l,r): \r\n    return sum_Odd(r) - sum_Odd(l - 1)"
+    },
+    {
+      "task_id": 228,
+      "query": "Write a python function to check whether all the bits are unset in the given range or not.",
+      "test_cases": [
+        "assert all_Bits_Set_In_The_Given_Range(4,1,2) == True",
+        "assert all_Bits_Set_In_The_Given_Range(17,2,4) == True",
+        "assert all_Bits_Set_In_The_Given_Range(39,4,6) == False"
+      ],
+      "reference_code": "def all_Bits_Set_In_The_Given_Range(n,l,r):  \r\n    num = (((1 << r) - 1) ^ ((1 << (l - 1)) - 1)) \r\n    new_num = n & num\r\n    if (new_num == 0): \r\n        return True\r\n    return False"
+    },
+    {
+      "task_id": 971,
+      "query": "Write a function to find the maximum number of segments of lengths a, b and c that can be formed from n.",
+      "test_cases": [
+        "assert maximum_segments(7, 5, 2, 5) == 2",
+        "assert maximum_segments(17, 2, 1, 3) == 17",
+        "assert maximum_segments(18, 16, 3, 6) == 6"
+      ],
+      "reference_code": "def maximum_segments(n, a, b, c) : \r\n\tdp = [-1] * (n + 10) \r\n\tdp[0] = 0\r\n\tfor i in range(0, n) : \r\n\t\tif (dp[i] != -1) : \r\n\t\t\tif(i + a <= n ): \r\n\t\t\t\tdp[i + a] = max(dp[i] + 1, \r\n\t\t\t\t\t\t\tdp[i + a]) \r\n\t\t\tif(i + b <= n ): \r\n\t\t\t\tdp[i + b] = max(dp[i] + 1, \r\n\t\t\t\t\t\t\tdp[i + b]) \r\n\t\t\tif(i + c <= n ): \r\n\t\t\t\tdp[i + c] = max(dp[i] + 1, \r\n\t\t\t\t\t\t\tdp[i + c]) \r\n\treturn dp[n]"
+    },
+    {
+      "task_id": 519,
+      "query": "Write a function to calculate volume of a tetrahedron.",
+      "test_cases": [
+        "assert volume_tetrahedron(10)==117.85",
+        "assert volume_tetrahedron(15)==397.75",
+        "assert volume_tetrahedron(20)==942.81"
+      ],
+      "reference_code": "import math\r\ndef volume_tetrahedron(num):\r\n\tvolume = (num ** 3 / (6 * math.sqrt(2)))\t\r\n\treturn round(volume, 2)"
+    },
+    {
+      "task_id": 270,
+      "query": "Write a python function to find the sum of even numbers at even positions.",
+      "test_cases": [
+        "assert sum_even_and_even_index([5, 6, 12, 1, 18, 8],6) == 30",
+        "assert sum_even_and_even_index([3, 20, 17, 9, 2, 10, 18, 13, 6, 18],10) == 26",
+        "assert sum_even_and_even_index([5, 6, 12, 1],4) == 12"
+      ],
+      "reference_code": "def sum_even_and_even_index(arr,n):  \r\n    i = 0\r\n    sum = 0\r\n    for i in range(0,n,2): \r\n        if (arr[i] % 2 == 0) : \r\n            sum += arr[i]  \r\n    return sum"
+    },
+    {
+      "task_id": 280,
+      "query": "Write a function to search an element in the given array by using sequential search.",
+      "test_cases": [
+        "assert sequential_search([11,23,58,31,56,77,43,12,65,19],31) == (True, 3)",
+        "assert sequential_search([12, 32, 45, 62, 35, 47, 44, 61],61) == (True, 7)",
+        "assert sequential_search([9, 10, 17, 19, 22, 39, 48, 56],48) == (True, 6)"
+      ],
+      "reference_code": "def sequential_search(dlist, item):\r\n    pos = 0\r\n    found = False\r\n    while pos < len(dlist) and not found:\r\n        if dlist[pos] == item:\r\n            found = True\r\n        else:\r\n            pos = pos + 1\r\n    return found, pos"
+    },
+    {
+      "task_id": 486,
+      "query": "Write a function to compute binomial probability for the given number.",
+      "test_cases": [
+        "assert binomial_probability(10, 5, 1.0/3) == 0.13656454808718185",
+        "assert binomial_probability(11, 6, 2.0/4) == 0.2255859375",
+        "assert binomial_probability(12, 7, 3.0/5) == 0.227030335488"
+      ],
+      "reference_code": "def nCr(n, r): \r\n\tif (r > n / 2): \r\n\t\tr = n - r \r\n\tanswer = 1 \r\n\tfor i in range(1, r + 1): \r\n\t\tanswer *= (n - r + i) \r\n\t\tanswer /= i \r\n\treturn answer \r\ndef binomial_probability(n, k, p): \r\n\treturn (nCr(n, k) * pow(p, k) *\tpow(1 - p, n - k)) "
+    },
+    {
+      "task_id": 901,
+      "query": "Write a function to find the smallest multiple of the first n numbers.",
+      "test_cases": [
+        "assert smallest_multiple(13)==360360",
+        "assert smallest_multiple(2)==2",
+        "assert smallest_multiple(1)==1"
+      ],
+      "reference_code": "def smallest_multiple(n):\r\n    if (n<=2):\r\n      return n\r\n    i = n * 2\r\n    factors = [number  for number in range(n, 1, -1) if number * 2 > n]\r\n    while True:\r\n        for a in factors:\r\n            if i % a != 0:\r\n                i += n\r\n                break\r\n            if (a == factors[-1] and i % a == 0):\r\n                return i"
+    },
+    {
+      "task_id": 202,
+      "query": "Write a function to remove even characters in a string.",
+      "test_cases": [
+        "assert remove_even(\"python\")==(\"pto\")",
+        "assert remove_even(\"program\")==(\"porm\")",
+        "assert remove_even(\"language\")==(\"lnug\")"
+      ],
+      "reference_code": "def remove_even(str1):\r\n str2 = ''\r\n for i in range(1, len(str1) + 1):\r\n    if(i % 2 != 0):\r\n        str2 = str2 + str1[i - 1]\r\n return str2"
+    },
+    {
+      "task_id": 681,
+      "query": "Write a python function to find the smallest prime divisor of a number.",
+      "test_cases": [
+        "assert smallest_Divisor(10) == 2",
+        "assert smallest_Divisor(25) == 5",
+        "assert smallest_Divisor(31) == 31"
+      ],
+      "reference_code": "def smallest_Divisor(n): \r\n    if (n % 2 == 0): \r\n        return 2; \r\n    i = 3;  \r\n    while (i*i <= n): \r\n        if (n % i == 0): \r\n            return i; \r\n        i += 2; \r\n    return n; "
+    },
+    {
+      "task_id": 24,
+      "query": "Write a function to convert the given binary number to its decimal equivalent.",
+      "test_cases": [
+        "assert binary_to_decimal(100) == 4",
+        "assert binary_to_decimal(1011) == 11",
+        "assert binary_to_decimal(1101101) == 109"
+      ],
+      "reference_code": "def binary_to_decimal(binary): \r\n    binary1 = binary \r\n    decimal, i, n = 0, 0, 0\r\n    while(binary != 0): \r\n        dec = binary % 10\r\n        decimal = decimal + dec * pow(2, i) \r\n        binary = binary//10\r\n        i += 1\r\n    return (decimal)"
+    },
+    {
+      "task_id": 728,
+      "query": "Write a function to sum elements in two lists.",
+      "test_cases": [
+        "assert sum_list([10,20,30],[15,25,35])==[25,45,65]",
+        "assert sum_list([1,2,3],[5,6,7])==[6,8,10]",
+        "assert sum_list([15,20,30],[15,45,75])==[30,65,105]"
+      ],
+      "reference_code": "def sum_list(lst1,lst2):\r\n  res_list = [lst1[i] + lst2[i] for i in range(len(lst1))] \r\n  return res_list"
+    },
+    {
+      "task_id": 186,
+      "query": "Write a function to search some literals strings in a string by using regex.",
+      "test_cases": [
+        "assert check_literals('The quick brown fox jumps over the lazy dog.',['fox']) == 'Matched!'",
+        "assert check_literals('The quick brown fox jumps over the lazy dog.',['horse']) == 'Not Matched!'",
+        "assert check_literals('The quick brown fox jumps over the lazy dog.',['lazy']) == 'Matched!'"
+      ],
+      "reference_code": "import re\r\ndef check_literals(text, patterns):\r\n  for pattern in patterns:\r\n    if re.search(pattern,  text):\r\n        return ('Matched!')\r\n    else:\r\n        return ('Not Matched!')"
+    },
+    {
+      "task_id": 107,
+      "query": "Write a python function to count hexadecimal numbers for a given range.",
+      "test_cases": [
+        "assert count_Hexadecimal(10,15) == 6",
+        "assert count_Hexadecimal(2,4) == 0",
+        "assert count_Hexadecimal(15,16) == 1"
+      ],
+      "reference_code": "def count_Hexadecimal(L,R) :  \r\n    count = 0;  \r\n    for i in range(L,R + 1) : \r\n        if (i >= 10 and i <= 15) : \r\n            count += 1;  \r\n        elif (i > 15) : \r\n            k = i;  \r\n            while (k != 0) :  \r\n                if (k % 16 >= 10) : \r\n                    count += 1;  \r\n                k = k // 16;  \r\n    return count;  "
+    },
+    {
+      "task_id": 384,
+      "query": "Write a python function to find the frequency of the smallest value in a given array.",
+      "test_cases": [
+        "assert frequency_Of_Smallest(5,[1,2,3,4,3]) == 1",
+        "assert frequency_Of_Smallest(7,[3,1,2,5,6,2,3]) == 1",
+        "assert frequency_Of_Smallest(7,[3,3,6,3,7,4,9]) == 3"
+      ],
+      "reference_code": "def frequency_Of_Smallest(n,arr): \r\n    mn = arr[0] \r\n    freq = 1\r\n    for i in range(1,n): \r\n        if (arr[i] < mn): \r\n            mn = arr[i] \r\n            freq = 1\r\n        elif (arr[i] == mn): \r\n            freq += 1\r\n    return freq "
+    },
+    {
+      "task_id": 645,
+      "query": "Write a function to find the product of it\u2019s kth index in the given tuples.",
+      "test_cases": [
+        "assert find_k_product([(5, 6, 7), (1, 3, 5), (8, 9, 19)], 2) == 665",
+        "assert find_k_product([(6, 7, 8), (2, 4, 6), (9, 10, 20)], 1) == 280",
+        "assert find_k_product([(7, 8, 9), (3, 5, 7), (10, 11, 21)], 0) == 210"
+      ],
+      "reference_code": "def get_product(val) : \r\n\tres = 1\r\n\tfor ele in val: \r\n\t\tres *= ele \r\n\treturn res \r\ndef find_k_product(test_list, K):\r\n  res = get_product([sub[K] for sub in test_list])\r\n  return (res) "
+    },
+    {
+      "task_id": 463,
+      "query": "Write a function to find the maximum product subarray of the given array.",
+      "test_cases": [
+        "assert max_subarray_product([1, -2, -3, 0, 7, -8, -2]) == 112",
+        "assert max_subarray_product([6, -3, -10, 0, 2]) == 180 ",
+        "assert max_subarray_product([-2, -40, 0, -2, -3]) == 80"
+      ],
+      "reference_code": "def max_subarray_product(arr):\r\n\tn = len(arr)\r\n\tmax_ending_here = 1\r\n\tmin_ending_here = 1\r\n\tmax_so_far = 0\r\n\tflag = 0\r\n\tfor i in range(0, n):\r\n\t\tif arr[i] > 0:\r\n\t\t\tmax_ending_here = max_ending_here * arr[i]\r\n\t\t\tmin_ending_here = min (min_ending_here * arr[i], 1)\r\n\t\t\tflag = 1\r\n\t\telif arr[i] == 0:\r\n\t\t\tmax_ending_here = 1\r\n\t\t\tmin_ending_here = 1\r\n\t\telse:\r\n\t\t\ttemp = max_ending_here\r\n\t\t\tmax_ending_here = max (min_ending_here * arr[i], 1)\r\n\t\t\tmin_ending_here = temp * arr[i]\r\n\t\tif (max_so_far < max_ending_here):\r\n\t\t\tmax_so_far = max_ending_here\r\n\tif flag == 0 and max_so_far == 0:\r\n\t\treturn 0\r\n\treturn max_so_far"
+    },
+    {
+      "task_id": 871,
+      "query": "Write a python function to check whether the given strings are rotations of each other or not.",
+      "test_cases": [
+        "assert are_Rotations(\"abc\",\"cba\") == False",
+        "assert are_Rotations(\"abcd\",\"cdba\") == False",
+        "assert are_Rotations(\"abacd\",\"cdaba\") == True"
+      ],
+      "reference_code": "def are_Rotations(string1,string2): \r\n    size1 = len(string1) \r\n    size2 = len(string2) \r\n    temp = '' \r\n    if size1 != size2: \r\n        return False\r\n    temp = string1 + string1 \r\n    if (temp.count(string2)> 0): \r\n        return True\r\n    else: \r\n        return False"
+    },
+    {
+      "task_id": 255,
+      "query": "Write a function to choose specified number of colours from three different colours and generate all the combinations with repetitions.",
+      "test_cases": [
+        "assert combinations_colors( [\"Red\",\"Green\",\"Blue\"],1)==[('Red',), ('Green',), ('Blue',)]",
+        "assert combinations_colors( [\"Red\",\"Green\",\"Blue\"],2)==[('Red', 'Red'), ('Red', 'Green'), ('Red', 'Blue'), ('Green', 'Green'), ('Green', 'Blue'), ('Blue', 'Blue')]",
+        "assert combinations_colors( [\"Red\",\"Green\",\"Blue\"],3)==[('Red', 'Red', 'Red'), ('Red', 'Red', 'Green'), ('Red', 'Red', 'Blue'), ('Red', 'Green', 'Green'), ('Red', 'Green', 'Blue'), ('Red', 'Blue', 'Blue'), ('Green', 'Green', 'Green'), ('Green', 'Green', 'Blue'), ('Green', 'Blue', 'Blue'), ('Blue', 'Blue', 'Blue')]"
+      ],
+      "reference_code": "from itertools import combinations_with_replacement \r\ndef combinations_colors(l, n):\r\n    return list(combinations_with_replacement(l,n))\r"
+    },
+    {
+      "task_id": 953,
+      "query": "Write a python function to find the minimun number of subsets with distinct elements.",
+      "test_cases": [
+        "assert subset([1, 2, 3, 4],4) == 1",
+        "assert subset([5, 6, 9, 3, 4, 3, 4],7) == 2",
+        "assert subset([1, 2, 3 ],3) == 1"
+      ],
+      "reference_code": "def subset(ar, n): \r\n    res = 0\r\n    ar.sort() \r\n    for i in range(0, n) : \r\n        count = 1\r\n        for i in range(n - 1): \r\n            if ar[i] == ar[i + 1]: \r\n                count+=1\r\n            else: \r\n                break \r\n        res = max(res, count)  \r\n    return res "
+    },
+    {
+      "task_id": 504,
+      "query": "Write a python function to find the cube sum of first n natural numbers.",
+      "test_cases": [
+        "assert sum_Of_Series(5) == 225",
+        "assert sum_Of_Series(2) == 9",
+        "assert sum_Of_Series(3) == 36"
+      ],
+      "reference_code": "def sum_Of_Series(n): \r\n    sum = 0\r\n    for i in range(1,n + 1): \r\n        sum += i * i*i       \r\n    return sum"
+    },
+    {
+      "task_id": 968,
+      "query": "Write a python function to find maximum possible value for the given periodic function.",
+      "test_cases": [
+        "assert floor_Max(11,10,9) == 9",
+        "assert floor_Max(5,7,4) == 2",
+        "assert floor_Max(2,2,1) == 1"
+      ],
+      "reference_code": "def floor_Max(A,B,N):\r\n    x = min(B - 1,N)\r\n    return (A*x) // B"
+    },
+    {
+      "task_id": 700,
+      "query": "Write a function to count the number of elements in a list which are within a specific range.",
+      "test_cases": [
+        "assert count_range_in_list([10,20,30,40,40,40,70,80,99],40,100)==6",
+        "assert count_range_in_list(['a','b','c','d','e','f'],'a','e')==5",
+        "assert count_range_in_list([7,8,9,15,17,19,45],15,20)==3"
+      ],
+      "reference_code": "def count_range_in_list(li, min, max):\r\n\tctr = 0\r\n\tfor x in li:\r\n\t\tif min <= x <= max:\r\n\t\t\tctr += 1\r\n\treturn ctr"
+    },
+    {
+      "task_id": 26,
+      "query": "Write a function to check if the given tuple list has all k elements.",
+      "test_cases": [
+        "assert check_k_elements([(4, 4), (4, 4, 4), (4, 4), (4, 4, 4, 4), (4, )], 4) == True",
+        "assert check_k_elements([(7, 7, 7), (7, 7)], 7) == True",
+        "assert check_k_elements([(9, 9), (9, 9, 9, 9)], 7) == False"
+      ],
+      "reference_code": "def check_k_elements(test_list, K):\r\n  res = True\r\n  for tup in test_list:\r\n    for ele in tup:\r\n      if ele != K:\r\n        res = False\r\n  return (res) "
+    },
+    {
+      "task_id": 695,
+      "query": "Write a function to check if each element of the second tuple is greater than its corresponding index in the first tuple.",
+      "test_cases": [
+        "assert check_greater((10, 4, 5), (13, 5, 18)) == True",
+        "assert check_greater((1, 2, 3), (2, 1, 4)) == False",
+        "assert check_greater((4, 5, 6), (5, 6, 7)) == True"
+      ],
+      "reference_code": "def check_greater(test_tup1, test_tup2):\r\n  res = all(x < y for x, y in zip(test_tup1, test_tup2))\r\n  return (res) "
+    },
+    {
+      "task_id": 1,
+      "query": "Write a function to find the minimum cost path to reach (m, n) from (0, 0) for the given cost matrix cost[][] and a position (m, n) in cost[][].",
+      "test_cases": [
+        "assert min_cost([[1, 2, 3], [4, 8, 2], [1, 5, 3]], 2, 2) == 8",
+        "assert min_cost([[2, 3, 4], [5, 9, 3], [2, 6, 4]], 2, 2) == 12",
+        "assert min_cost([[3, 4, 5], [6, 10, 4], [3, 7, 5]], 2, 2) == 16"
+      ],
+      "reference_code": "R = 3\r\nC = 3\r\ndef min_cost(cost, m, n): \r\n\ttc = [[0 for x in range(C)] for x in range(R)] \r\n\ttc[0][0] = cost[0][0] \r\n\tfor i in range(1, m+1): \r\n\t\ttc[i][0] = tc[i-1][0] + cost[i][0] \r\n\tfor j in range(1, n+1): \r\n\t\ttc[0][j] = tc[0][j-1] + cost[0][j] \r\n\tfor i in range(1, m+1): \r\n\t\tfor j in range(1, n+1): \r\n\t\t\ttc[i][j] = min(tc[i-1][j-1], tc[i-1][j], tc[i][j-1]) + cost[i][j] \r\n\treturn tc[m][n]"
+    },
+    {
+      "task_id": 945,
+      "query": "Write a function to convert the given tuples into set.",
+      "test_cases": [
+        "assert tuple_to_set(('x', 'y', 'z') ) == {'y', 'x', 'z'}",
+        "assert tuple_to_set(('a', 'b', 'c') ) == {'c', 'a', 'b'}",
+        "assert tuple_to_set(('z', 'd', 'e') ) == {'d', 'e', 'z'}"
+      ],
+      "reference_code": "def tuple_to_set(t):\r\n  s = set(t)\r\n  return (s) "
+    },
+    {
+      "task_id": 418,
+      "query": "Write a python function to find the sublist having maximum length.",
+      "test_cases": [
+        "assert Find_Max([['A'],['A','B'],['A','B','C']]) == ['A','B','C']",
+        "assert Find_Max([[1],[1,2],[1,2,3]]) == [1,2,3]",
+        "assert Find_Max([[1,1],[1,2,3],[1,5,6,1]]) == [1,5,6,1]"
+      ],
+      "reference_code": "def Find_Max(lst): \r\n    maxList = max((x) for x in lst) \r\n    return maxList"
+    },
+    {
+      "task_id": 821,
+      "query": "Write a function to merge two dictionaries into a single expression.",
+      "test_cases": [
+        "assert merge_dictionaries({ \"R\": \"Red\", \"B\": \"Black\", \"P\": \"Pink\" }, { \"G\": \"Green\", \"W\": \"White\" })=={'B': 'Black', 'R': 'Red', 'P': 'Pink', 'G': 'Green', 'W': 'White'}",
+        "assert merge_dictionaries({ \"R\": \"Red\", \"B\": \"Black\", \"P\": \"Pink\" },{ \"O\": \"Orange\", \"W\": \"White\", \"B\": \"Black\" })=={'O': 'Orange', 'P': 'Pink', 'B': 'Black', 'W': 'White', 'R': 'Red'}",
+        "assert merge_dictionaries({ \"G\": \"Green\", \"W\": \"White\" },{ \"O\": \"Orange\", \"W\": \"White\", \"B\": \"Black\" })=={'W': 'White', 'O': 'Orange', 'G': 'Green', 'B': 'Black'}"
+      ],
+      "reference_code": "import collections as ct\r\ndef merge_dictionaries(dict1,dict2):\r\n    merged_dict = dict(ct.ChainMap({}, dict1, dict2))\r\n    return merged_dict"
+    }
+  ],
+  "detailed_results": [
+    {
+      "task_id": 585,
+      "query": "Write a function to find the n - expensive price items from a given dataset using heap queue algorithm.",
+      "generated_code": "To find the `n` most expensive items from a dataset using a heap queue (",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 6.274234056472778,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 399,
+      "query": "Write a function to perform the mathematical bitwise xor operation across the given tuples.",
+      "generated_code": "To perform a bitwise XOR operation across multiple tuples, we need to iterate through",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 6.340698957443237,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 853,
+      "query": "Write a python function to find sum of odd factors of a number.",
+      "generated_code": "To find the sum of odd factors of a number, we can iterate through all",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.8983781337738037,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 3,
+      "query": "Write a python function to identify non-prime numbers.",
+      "generated_code": "To identify non-prime numbers, we first need to understand the definition of a prime",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.5839109420776367,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 872,
+      "query": "Write a function to check if a nested list is a subset of another nested list.",
+      "generated_code": "To determine if a nested list is a subset of another nested list, we need to ensure that every",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.094950199127197,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 747,
+      "query": "Write a function to find the longest common subsequence for the given three string sequence.",
+      "generated_code": "To find the longest common subsequence (LCS) for three strings, we can extend the dynamic programming approach",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 2.9706480503082275,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 106,
+      "query": "Write a function to add the given list to the given tuples.",
+      "generated_code": "To \"add\" a list to a tuple typically means to concatenate the elements of the list to the end",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.688091278076172,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 295,
+      "query": "Write a function to return the sum of all divisors of a number.",
+      "generated_code": "To find the sum of all divisors of a number, we can iterate from 1 up to",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.4756810665130615,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 42,
+      "query": "Write a python function to find the sum of repeated elements in a given array.",
+      "generated_code": "To find the sum of repeated elements in a given array, we need to identify which elements appear more",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.7930619716644287,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 148,
+      "query": "Write a function to divide a number into two parts such that the sum of digits is maximum.",
+      "generated_code": "The problem asks us to divide a given number `n` into two parts, `a` and",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.173391103744507,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 308,
+      "query": "Write a function to find the specified number of largest products from two given lists.",
+      "generated_code": "To find the `k` largest products from two given lists, we can generate",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 2.987277030944824,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 818,
+      "query": "Write a python function to count lower case letters in a given string.",
+      "generated_code": "def count_lowercase_letters(input_string: str) -> int:\n    \"\"\"\n    Counts the number of lowercase letters in a given string.\n\n    Args:\n        input_string: The string to analyze.\n\n    Returns:\n        The total count of lowercase letters in the string.\n    \"\"\"\n    count = 0\n    for char in input_string:\n        if char.islower():\n            count += 1\n    return count\n\n# --- Examples ---\nif __name__",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.976206064224243,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 923,
+      "query": "Write a function to find the length of the shortest string that has both str1 and str2 as subsequences.",
+      "generated_code": "To find the length of the shortest string that has both `str1` and `str2` as",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.7894721031188965,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 372,
+      "query": "Write a function to sort a given list of elements in ascending order using heap queue algorithm.",
+      "generated_code": "To sort a list of elements in ascending order using the heap queue algorithm in Python, we can leverage the built-in `heapq` module. The `heapq` module provides an implementation of the heap queue algorithm, also known as the priority queue algorithm.\n\nHere's how the `heap_sort` function works:\n1.  **Heapify**: It first transforms the input list into a min-heap in-place using `heapq.heapify()`. A min-heap ensures that the smallest element is always at the root (index 0).\n2.  **Extract and Re",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.9936609268188477,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 217,
+      "query": "Write a python function to find the first repeated character in a given string.",
+      "generated_code": "To find the first repeated character in a string, we can iterate through the string and keep track of characters we've already seen. A `set` is an efficient data structure for this purpose, as checking",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.258357048034668,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 817,
+      "query": "Write a function to find numbers divisible by m or n from a list of numbers using lambda function.",
+      "generated_code": "def find_divisible_numbers_lambda(numbers_list, m, n):\n    \"\"\"\n    Finds numbers from a list that are divisible by m or n using a lambda function.\n\n    Args:\n        numbers_list (list): A list of integers.\n        m (int): The first divisor.\n        n (int): The second divisor.\n\n    Returns:\n        list: A new list containing numbers from the original list that are\n              divisible by m or n.\n    \"\"\"\n    if not isinstance(numbers_list, list):\n        raise TypeError(\"numbers_list must be a list.\")\n    if not all(isinstance(x, int) for x in numbers_list):\n        raise ValueError(\"All elements in numbers_list must be integers.\")\n    if not isinstance(m, int) or not isinstance(n, int):\n        raise TypeError(\"m and n must be integers.\")\n    if m == 0 and n == 0:\n        # If both are 0, no number (except 0 itself) is 'divisible'",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.6028506755828857,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 668,
+      "query": "Write a python function to replace multiple occurence of character by single.",
+      "generated_code": "To replace multiple consecutive occurrences of any character with a single occurrence of that character, you",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.584228754043579,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 875,
+      "query": "Write a function to find the minimum difference in the tuple pairs of given tuples.",
+      "generated_code": "To find the minimum difference in the tuple pairs, we can iterate through each inner tuple, calculate the",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.646523952484131,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 47,
+      "query": "Write a python function to find the last digit when factorial of a divides factorial of b.",
+      "generated_code": "The problem asks for the \"last digit when factorial of a divides factorial of b\". This phrasing is slightly",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.6225521564483643,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 924,
+      "query": "Write a function to find maximum of two numbers.",
+      "generated_code": "def find_maximum_of_two(num1: float, num2: float) -> float:\n    \"\"\"",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.9989511966705322,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 461,
+      "query": "Write a python function to count the upper case characters in a given string.",
+      "generated_code": "def count_uppercase_chars(input_string: str) -> int:\n    \"\"\"\n    Counts the number of uppercase characters in a given string.\n\n    Args:\n        input_string: The string to analyze.\n\n    Returns:\n        The total count of uppercase characters in the string.\n    \"\"\"\n    upper_count = 0\n    for char in input_string:\n        if char.isupper():\n            upper_count += 1\n    return upper_count\n\n# --- Examples ---\nif __name__ == \"__main__\":\n    # Test cases\n    string1 = \"Hello World\"\n    string2 = \"PYTHON Programming\"\n    string3 = \"all lowercase\"\n    string4 = \"NO UPPERCASE HERE!\"\n    string5 = \"\"",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": false,
+      "validation_breakdown": {
+        "layer1_syntax": true,
+        "layer2_api": true,
+        "layer3_types": true,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.6548123359680176,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 593,
+      "query": "Write a function to remove leading zeroes from an ip address.",
+      "generated_code": "It's a common requirement to normalize IP addresses by removing leading zeros from their octets. For",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.168398857116699,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 478,
+      "query": "Write a function to remove lowercase substrings from a given string.",
+      "generated_code": "To remove lowercase substrings from a given string, you can iterate through the string and build",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.601080894470215,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 835,
+      "query": "Write a python function to find the slope of a line.",
+      "generated_code": "To find the slope of a line, you typically need two distinct points `(",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.050761938095093,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 658,
+      "query": "Write a function to find the item with maximum occurrences in a given list.",
+      "generated_code": "To find the item with the maximum occurrences in a list, we can use the `collections.Counter",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.748382091522217,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 431,
+      "query": "Write a function that takes two lists and returns true if they have at least one common element.",
+      "generated_code": "To check if two lists have at least one common element, the most efficient approach, especially for",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.277587890625,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 423,
+      "query": "Write a function to solve gold mine problem.",
+      "generated_code": "The Gold Mine Problem is a classic dynamic programming problem.\nGiven a gold mine represented as a",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.786346197128296,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 933,
+      "query": "Write a function to convert camel case string to snake case string by using regex.",
+      "generated_code": "To convert a camel case string to a snake case string using regular expressions, we need to identify",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.789012908935547,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 338,
+      "query": "Write a python function to count the number of substrings with same first and last characters.",
+      "generated_code": "The problem asks us to count all substrings within a given string where the first character of the",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.0886268615722656,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 825,
+      "query": "Write a python function to access multiple elements of specified index from a given list.",
+      "generated_code": "To access multiple elements from a list at specified indices, you can iterate through the list of indices",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.38959527015686,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 207,
+      "query": "Write a function to count the longest repeating subsequences such that the two subsequences don\u2019t have same string characters at same positions.",
+      "generated_code": "The problem asks us to find the length of the longest repeating subsequence (LRS) of a",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.5809600353240967,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 341,
+      "query": "Write a function to convert the given set into ordered tuples.",
+      "generated_code": "To convert a set into an \"ordered tuple\", we first need to define what \"ordered\"",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.199913024902344,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 292,
+      "query": "Write a python function to find quotient of two numbers.",
+      "generated_code": "def find_quotient(numerator, denominator):\n  \"\"\"\n  Calculates the quotient of two numbers.\n\n  Args:\n    numerator: The number to be divided (dividend).\n    denominator: The number by which to divide (divisor).\n\n  Returns:\n    The quotient of the numerator divided by the denominator.\n\n  Raises:\n    ValueError: If the denominator is zero.\n  \"\"\"\n  if denominator == 0:\n    raise ValueError(\"Cannot divide by zero. Denominator cannot be 0.\")\n  \n  return numerator / denominator\n\n# --- Examples ---\nif __name__ == \"__main__\":\n  # Example 1: Basic division\n  num1 = 10\n  den1 = 2\n  try:\n    result1 = find_quotient(num1, den1)\n    print(f\"The quotient of {num1} and {den1} is: {result1}\") # Expected: 5.0\n  except ValueError as",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.8368191719055176,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 877,
+      "query": "Write a python function to sort the given string.",
+      "generated_code": "To sort a string in Python, you typically want to arrange its characters in alphabetical order. Python's built-in `sorted()` function is perfect for this, as it can take an iterable (like a string) and return a new sorted list of its items. You can then",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.534316062927246,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 25,
+      "query": "Write a python function to find the product of non-repeated elements in a given array.",
+      "generated_code": "To find the product of non-repeated elements in a given array, we first need to identify",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.053269147872925,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 110,
+      "query": "Write a function to extract the ranges that are missing from the given list with the given start range and end range values.",
+      "generated_code": "To extract missing ranges, we first need to normalize the given `existing_ranges` by sorting",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.583017110824585,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 768,
+      "query": "Write a python function to check for odd parity of a given number.",
+      "generated_code": "To check for \"odd parity\" of a number means to determine if the count of set",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.2970659732818604,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 5,
+      "query": "Write a function to find the number of ways to fill it with 2 x 1 dominoes for the given 3 x n board.",
+      "generated_code": "This is a classic dynamic programming problem. The key observation is that a 3 x",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.687264919281006,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 383,
+      "query": "Write a python function to toggle all odd bits of a given number.",
+      "generated_code": "To toggle all odd bits of a number means to flip the value of bits at",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.787475824356079,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 183,
+      "query": "Write a function to count all the distinct pairs having a difference of k in any array.",
+      "generated_code": "To count all distinct pairs in an array that have a difference of `k`, we",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 10.558681011199951,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 776,
+      "query": "Write a function to count those characters which have vowels as their neighbors in the given string.",
+      "generated_code": "The problem asks us to count characters in a string that are \"sandwiched\" between two vowels.",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.413329839706421,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 538,
+      "query": "Write a python function to convert a given string list to a tuple.",
+      "generated_code": "def convert_list_to_tuple(string_list: list) -> tuple:\n    \"\"\"\n    Converts a given list of strings into a tuple.\n\n    Args:\n        string_list: A list of strings.\n\n    Returns:\n        A tuple containing the elements from the input list.\n    \"\"\"\n    if not isinstance(string_list, list):\n        raise TypeError(\"Input must be a list.\")\n    \n    # The tuple() constructor directly converts an iterable (like a list)\n    # into a tuple.\n    return tuple(string_list)\n\n# --- Example Usage ---\nif __name__ == \"__main__\":\n    # Example 1: A list of strings\n    my_string_list1 = [\"apple\", \"banana\", \"cherry\", \"date\"]\n    my_tuple1 = convert_list_to_tuple(my_string_list1)\n    print(f\"Original list 1: {my_string_list1}\")\n    print(f\"Converted tuple 1: {my_tuple1}\")\n    print(f\"Type of converted tuple 1: {type(my_tuple1)}\\n\")\n\n    # Example 2: An empty list\n    my_string_list2 = []\n    my_tuple2 = convert_list_to_tuple(my_string_list2)\n    print(f\"Original list 2: {my_string_list2}\")\n    print(f\"Converted tuple 2: {my_tuple2}\")\n    print(f\"",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.0264182090759277,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 260,
+      "query": "Write a function to find the nth newman\u2013shanks\u2013williams prime number.",
+      "generated_code": "The Newman-Shanks-Williams (NSW) numbers are a sequence of integers defined by the recurrence",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 2.7854690551757812,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 674,
+      "query": "Write a function to remove duplicate words from a given string using collections module.",
+      "generated_code": "To remove duplicate words from a string while preserving their original order using the `collections` module, we can",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.074725866317749,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 300,
+      "query": "Write a function to find the count of all binary sequences of length 2n such that sum of first n bits is same as sum of last n bits.",
+      "generated_code": "The problem asks us to find the count of all binary sequences of length `2n` such that the",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.094506025314331,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 336,
+      "query": "Write a function to check whether the given month name contains 28 days or not.",
+      "generated_code": "",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": false,
+      "validation_breakdown": {
+        "layer1_syntax": true,
+        "layer2_api": true,
+        "layer3_types": true,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.046473979949951,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 581,
+      "query": "Write a python function to find the surface area of the square pyramid.",
+      "generated_code": "To find the surface area of a square pyramid, we need to sum the area of",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.2649409770965576,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 874,
+      "query": "Write a python function to check if the string is a concatenation of another string.",
+      "generated_code": "To check if a string is a concatenation of another string, we need to verify two conditions:",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.0696887969970703,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 323,
+      "query": "Write a function to re-arrange the given array in alternating positive and negative items.",
+      "generated_code": "The task is to re-arrange an array such that positive and negative numbers alternate. This",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.034296989440918,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 815,
+      "query": "Write a function to sort the given array without using any sorting algorithm. the given array consists of only 0, 1, and 2.",
+      "generated_code": "The problem of sorting an array containing only 0s, 1s, and 2s",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.182804822921753,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 964,
+      "query": "Write a python function to check whether the length of the word is even or not.",
+      "generated_code": "def is_word_length_even(word: str) -> bool:\n  \"\"\"\n  Checks if the length of a given word is even.\n\n  Args:\n    word: The input string (word) to check.\n\n  Returns:\n    True if the length of the word is even, False otherwise.\n  \"\"\"\n  if not isinstance(word, str):\n    raise TypeError(\"Input must be a string.\")\n    \n  return len(word) % 2 == 0\n\n# --- Examples ---\nif __name__ == \"__main__\":\n  print(f\"'hello' length even? {is_word_length_even('hello')}\")      # Expected: False (length 5)\n  print(f\"'python' length even? {is_word_length_even('python')}\")    # Expected: True (length 6)\n  print(f\"'' length even? {is_word_length_even('')}\")                # Expected: True (length 0)\n  print(f\"'a' length even? {is_word_length_even('a')}\")              # Expected: False (length 1)\n  print(f\"'ab' length even? {is_word_length_even('ab')}\")            # Expected: True (length 2)\n  print(f\"'programming' length even? {is_word_length_even('programming')}\") # Expected: False (length 11)\n  print(f\"'computer' length even? {is_word_length_even('computer')}\") # Expected: True (length 8)\n\n  # Example with non-string input (will raise TypeError)\n  try:\n    is_word_length_even(123)\n  except TypeError as e:\n    print(f\"Caught expected error: {e}\")\n\n  try:\n    is_word_length_even(None)\n  except TypeError as e:\n    print(f\"Caught expected error: {e}\")",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": false,
+      "validation_breakdown": {
+        "layer1_syntax": true,
+        "layer2_api": true,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.5900821685791016,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 16,
+      "query": "Write a function to find sequences of lowercase letters joined with an underscore.",
+      "generated_code": "To find sequences of lowercase letters joined with an underscore, we can use regular expressions. The pattern we'",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.7757251262664795,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 767,
+      "query": "Write a python function to count the number of pairs whose sum is equal to \u2018sum\u2019.",
+      "generated_code": "To count the number of pairs in a list whose sum is equal to a given target sum,",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.686915874481201,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 974,
+      "query": "Write a function to find the minimum total path sum in the given triangle.",
+      "generated_code": "The problem asks us to find the minimum total path sum from the top to the bottom of a",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.377631187438965,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 491,
+      "query": "Write a function to find the sum of geometric progression series.",
+      "generated_code": "To find the sum of a geometric progression (GP) series, we use specific formulas based on",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.2767879962921143,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 287,
+      "query": "Write a python function to find the sum of squares of first n even natural numbers.",
+      "generated_code": "To find the sum of squares of the first `n` even natural numbers,",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.1743760108947754,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 101,
+      "query": "Write a function to find the kth element in the given array.",
+      "generated_code": "To find the k-th element in a given array, the most straightforward approach is",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.095379114151001,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 565,
+      "query": "Write a python function to split a string into characters.",
+      "generated_code": "from typing import List\n\ndef split_string_into_characters(input_string: str) -> List[str]:\n    \"\"\"\n    Splits a given string into a list of its individual characters.\n\n    Args:\n        input_string: The string to be split.\n\n    Returns:\n        A list where each element is a single character from the input string.\n    \"\"\"\n    return list(input_string)\n\n# --- Example Usage ---\nif __name__ == \"__main__\":\n    # Test case 1: A simple word\n    word = \"hello\"\n    characters = split_string_into_characters(word)\n    print(f\"Splitting '{word}': {characters}\")\n    # Expected output: Splitting 'hello': ['h', 'e', 'l', 'l', 'o']",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": false,
+      "validation_breakdown": {
+        "layer1_syntax": true,
+        "layer2_api": true,
+        "layer3_types": true,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.004699945449829,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 558,
+      "query": "Write a python function to find the digit distance between two integers.",
+      "generated_code": "To find the \"digit distance\" between two integers, we typically mean the sum of",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.3215439319610596,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 704,
+      "query": "Write a function to calculate the harmonic sum of n-1.",
+      "generated_code": "To calculate the harmonic sum of `n-1`, we need to sum the reciprocals of integers from",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.3238580226898193,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 524,
+      "query": "Write a function to find the sum of maximum increasing subsequence of the given array.",
+      "generated_code": "The problem asks us to find the sum of the *maximum increasing subsequence*. This means we need",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.890838861465454,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 589,
+      "query": "Write a function to find perfect squares between two given numbers.",
+      "generated_code": "To find perfect squares between two given numbers, we can iterate through the numbers in the specified",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.41414213180542,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 512,
+      "query": "Write a function to count the element frequency in the mixed nested tuple.",
+      "generated_code": "To count the frequency of elements in a mixed nested tuple, we need to traverse the",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.174281120300293,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 682,
+      "query": "Write a function to multiply two lists using map and lambda function.",
+      "generated_code": "To multiply two lists element-wise using `map` and a `lambda` function",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.418256044387817,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 897,
+      "query": "Write a python function to check whether the word is present in a given sentence or not.",
+      "generated_code": "To check if a word is present in a given sentence, you can use Python's `in",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.071061849594116,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 428,
+      "query": "Write a function to sort the given array by using shell sort.",
+      "generated_code": "Shell Sort is an in-place comparison sort. It can be seen as a",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.814275026321411,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 834,
+      "query": "Write a function to generate a square matrix filled with elements from 1 to n raised to the power of 2 in spiral order.",
+      "generated_code": "The problem asks us to generate an `n x n` square matrix where elements are filled in",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.8894898891448975,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 314,
+      "query": "Write a function to find out the maximum sum such that no two chosen numbers are adjacent for the given rectangular grid of dimension 2 x n.",
+      "generated_code": "The problem asks us to find the maximum sum of numbers from a 2 x n grid such that no",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.349931001663208,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 647,
+      "query": "Write a function to split a string at uppercase letters.",
+      "generated_code": "To split a string at uppercase letters, where each uppercase letter initiates a new segment",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.656859874725342,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 672,
+      "query": "Write a function to find maximum of three numbers.",
+      "generated_code": "def find_maximum_of_three(num1: float, num2: float, num3: float) -> float:\n    \"\"\"\n    Finds the maximum among three given numbers.\n\n    Args:\n        num1: The first number.",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.7152252197265625,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 358,
+      "query": "Write a function to find modulo division of two lists using map and lambda function.",
+      "generated_code": "To find the modulo division of two lists element-wise using `map` and a `",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.637485027313232,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 797,
+      "query": "Write a python function to find the sum of all odd natural numbers within the range l and r.",
+      "generated_code": "To find the sum of all odd natural numbers within a given range `l` and `r` (",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.1030521392822266,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 228,
+      "query": "Write a python function to check whether all the bits are unset in the given range or not.",
+      "generated_code": "To check if all bits within a given range are unset (i.e., 0)",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.639491081237793,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 971,
+      "query": "Write a function to find the maximum number of segments of lengths a, b and c that can be formed from n.",
+      "generated_code": "This problem is a classic dynamic programming problem, often referred to as a variation of the \"",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.9399170875549316,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 519,
+      "query": "Write a function to calculate volume of a tetrahedron.",
+      "generated_code": "To calculate the volume of a tetrahedron, the most general and robust method is to use the coordinates",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.3374860286712646,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 270,
+      "query": "Write a python function to find the sum of even numbers at even positions.",
+      "generated_code": "To find the sum of even numbers that are located at even positions within a list, you can iterate through",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.0590240955352783,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 280,
+      "query": "Write a function to search an element in the given array by using sequential search.",
+      "generated_code": "Sequential search, also known as linear search, is the simplest search algorithm. It sequentially checks each",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.8040590286254883,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 486,
+      "query": "Write a function to compute binomial probability for the given number.",
+      "generated_code": "To compute binomial probability, we use the formula:\n\n$P(X=k) =",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.5750460624694824,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 901,
+      "query": "Write a function to find the smallest multiple of the first n numbers.",
+      "generated_code": "To find the smallest multiple of the first `n` numbers, we need to calculate",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.386296033859253,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 202,
+      "query": "Write a function to remove even characters in a string.",
+      "generated_code": "To \"remove even characters\" in a string typically means removing characters that appear at",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.598863124847412,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 681,
+      "query": "Write a python function to find the smallest prime divisor of a number.",
+      "generated_code": "To find the smallest prime divisor of a number, we can use an efficient approach:\n\n1.",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.417294979095459,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 24,
+      "query": "Write a function to convert the given binary number to its decimal equivalent.",
+      "generated_code": "To convert a binary number (represented as a string) to its decimal equivalent, Python provides a very convenient",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.937448024749756,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 728,
+      "query": "Write a function to sum elements in two lists.",
+      "generated_code": "The task \"sum elements in two lists\" can be interpreted in a couple of ways",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.197032928466797,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 186,
+      "query": "Write a function to search some literals strings in a string by using regex.",
+      "generated_code": "You're looking for a Python function that can search for multiple distinct literal strings within",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.5832250118255615,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 107,
+      "query": "Write a python function to count hexadecimal numbers for a given range.",
+      "generated_code": "The request \"count hexadecimal numbers for a given range\" can be interpreted in a few",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 66.66274189949036,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 384,
+      "query": "Write a python function to find the frequency of the smallest value in a given array.",
+      "generated_code": "def frequency_of_",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.3648340702056885,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 645,
+      "query": "Write a function to find the product of it\u2019s kth index in the given tuples.",
+      "generated_code": "To find the product of elements at a specific `k`-th index across a list of",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.64133620262146,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 463,
+      "query": "Write a function to find the maximum product subarray of the given array.",
+      "generated_code": "The \"Maximum Product Subarray\" problem asks us to find the contiguous subarray within a given array of numbers",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.23410701751709,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 871,
+      "query": "Write a python function to check whether the given strings are rotations of each other or not.",
+      "generated_code": "To check if two strings are rotations of each other, we can use a clever trick: if",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.2417311668395996,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 255,
+      "query": "Write a function to choose specified number of colours from three different colours and generate all the combinations with repetitions.",
+      "generated_code": "This task can be efficiently solved using the `itertools.product` function from Python's",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.21475887298584,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 953,
+      "query": "Write a python function to find the minimun number of subsets with distinct elements.",
+      "generated_code": "The problem asks us to find the minimum number of subsets such that each subset contains only distinct elements.",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.3532629013061523,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 504,
+      "query": "Write a python function to find the cube sum of first n natural numbers.",
+      "generated_code": "To find the cube sum of the first `n` natural numbers, we can use a well-",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.7508609294891357,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 968,
+      "query": "Write a python function to find maximum possible value for the given periodic function.",
+      "generated_code": "To find the maximum value of a periodic function, we typically need to know the function",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.066153049468994,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 700,
+      "query": "Write a function to count the number of elements in a list which are within a specific range.",
+      "generated_code": "To count the number of elements in a list that fall within a specific inclusive range, you",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.34665584564209,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 26,
+      "query": "Write a function to check if the given tuple list has all k elements.",
+      "generated_code": "To check if every tuple in a given list of tuples has exactly `k` elements, you",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.932321786880493,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 695,
+      "query": "Write a function to check if each element of the second tuple is greater than its corresponding index in the first tuple.",
+      "generated_code": "To check if each element of the second tuple is greater than its corresponding element in the first tuple,",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.4089109897613525,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 1,
+      "query": "Write a function to find the minimum cost path to reach (m, n) from (0, 0) for the given cost matrix cost[][] and a position (m, n) in cost[][].",
+      "generated_code": "To find the minimum cost path to reach a specific cell `(m, n)` from `(",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.5531089305877686,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 945,
+      "query": "Write a function to convert the given tuples into set.",
+      "generated_code": "To convert a collection of tuples into a set, you can simply pass the collection of tuples to the",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.6083600521087646,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 418,
+      "query": "Write a python function to find the sublist having maximum length.",
+      "generated_code": "To find the sublist with the maximum length, you can iterate through the list of",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 3.782489061355591,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    },
+    {
+      "task_id": 821,
+      "query": "Write a function to merge two dictionaries into a single expression.",
+      "generated_code": "To merge two dictionaries into a single expression in Python, the most common and idiomatic ways involve using dictionary",
+      "pass@1": false,
+      "pass@2": false,
+      "pass@3": false,
+      "hallucination_detected": true,
+      "validation_breakdown": {
+        "layer1_syntax": false,
+        "layer2_api": false,
+        "layer3_types": false,
+        "layer4_execution": false,
+        "all_passed": false
+      },
+      "total_time_seconds": 4.041501998901367,
+      "test_cases_total": 3,
+      "test_cases_passed": 0
+    }
+  ],
+  "aggregate_metrics": {
+    "pass@1": 0.0,
+    "pass@2": 0.0,
+    "pass@3": 0.0,
+    "hallucination_rate": 0.96,
+    "validation_breakdown": {
+      "layer1_syntax_pass_rate": 0.04,
+      "layer2_api_pass_rate": 0.04,
+      "layer3_types_pass_rate": 0.03,
+      "layer4_execution_pass_rate": 0.0
+    },
+    "avg_time_seconds": 4.39
+  },
+  "evaluation_date": "2026-06-17T17:08:35.272496",
+  "num_queries": 100,
+  "mode": "baseline_no_rag"
+}

@@ -1,0 +1,19 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Optional large generated files
+*.pkl
+*.faiss
